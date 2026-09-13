@@ -8,12 +8,7 @@
   "theme_color": "#080c14",
   "icons": [
     {
-      "src": "/Countdown/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/Countdown/icon-512.png",
+      "src": "/Countdown/icon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
