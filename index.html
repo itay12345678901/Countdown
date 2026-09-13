@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Academic Progress & Countdown</title>
+    <title>Academic & Holiday Tracker</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Outfit -->
@@ -16,10 +16,12 @@
                         sans: ['Outfit', 'sans-serif'],
                     },
                     colors: {
-                        darkBg: '#090d16',
-                        cardBg: '#131c2e',
-                        cardBorder: '#1e293b',
-                        accentGlow: '#6366f1',
+                        darkBg: '#080c14',
+                        cardBg: '#111827',
+                        cardBorder: '#1f293d',
+                        accentIndigo: '#6366f1',
+                        accentCyan: '#06b6d4',
+                        accentAmber: '#f59e0b',
                     }
                 }
             }
@@ -37,204 +39,285 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #090d16;
+            background-color: #080c14;
             color: #f8fafc;
             font-family: 'Outfit', sans-serif;
         }
-        /* Custom smooth glowing aura */
         .glow-aura {
-            box-shadow: 0 0 50px -10px rgba(99, 102, 241, 0.25);
+            box-shadow: 0 0 40px -10px rgba(99, 102, 241, 0.2);
         }
-        /* Radial gradient background accent */
+        .glow-holiday {
+            box-shadow: 0 0 40px -10px rgba(245, 158, 11, 0.2);
+        }
         .bg-radial-gradient {
-            background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #090d16 70%);
+            background: radial-gradient(circle at 50% 0%, #161b33 0%, #080c14 75%);
         }
     </style>
 </head>
-<body class="bg-radial-gradient flex flex-col justify-between items-center h-full w-full p-4 overflow-hidden">
+<body class="bg-radial-gradient flex flex-col justify-between items-center h-full w-full p-3 overflow-hidden">
 
     <!-- Top Header -->
-    <header class="w-full max-w-sm flex items-center justify-between pt-2 pb-1 shrink-0">
+    <header class="w-full max-w-sm flex items-center justify-between pt-1 pb-1 shrink-0">
         <div>
-            <h1 class="text-xs uppercase tracking-widest text-indigo-400 font-semibold">Academic Term</h1>
-            <p class="text-sm font-medium text-slate-300">Sep 1 – Jun 20</p>
+            <h1 class="text-[11px] uppercase tracking-widest text-indigo-400 font-semibold">IL School Year 2026–27</h1>
+            <p class="text-xs font-medium text-slate-300">Sep 1 – Jun 20</p>
         </div>
-        <div class="flex items-center space-x-2 bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-full shadow-inner">
+        <div class="flex items-center space-x-1.5 bg-slate-900/90 border border-slate-800 px-2.5 py-1 rounded-full shadow-inner">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span id="live-status" class="text-xs font-medium text-emerald-400 tracking-wide">Live Tracker</span>
+            <span class="text-[11px] font-medium text-emerald-400 tracking-wide">Live Sync</span>
         </div>
     </header>
 
-    <!-- Main Centerpiece Container -->
-    <main class="w-full max-w-sm flex-1 flex flex-col items-center justify-center my-auto min-h-0">
-        <div class="w-full bg-slate-900/60 backdrop-blur-xl border border-slate-800/80 rounded-3xl p-6 shadow-2xl glow-aura flex flex-col items-center relative overflow-hidden">
+    <!-- Main Centerpiece Container (No Scrolling) -->
+    <main class="w-full max-w-sm flex-1 flex flex-col justify-center space-y-3 my-auto min-h-0">
+        
+        <!-- Card 1: School Year Progress & Term Countdown -->
+        <div class="w-full bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-4 shadow-xl glow-aura flex flex-col relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl pointer-events-none"></div>
             
-            <!-- Subtle background lighting element -->
-            <div class="absolute -top-12 -right-12 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
-            <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"></div>
-
-            <!-- Percentage Display -->
-            <div class="text-center z-10 mb-5">
-                <span class="text-xs font-medium uppercase tracking-widest text-slate-400 block mb-1">Elapsed Progress</span>
-                <div class="flex items-baseline justify-center">
-                    <span id="percentage-display" class="text-4xl sm:text-5xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent">0.0000000%</span>
+            <div class="flex justify-between items-start mb-2">
+                <div>
+                    <span class="text-[10px] uppercase font-semibold text-indigo-400 tracking-wider block">Academic Progress</span>
+                    <div id="percentage-display" class="text-2xl sm:text-3xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent">0.0000000%</div>
+                </div>
+                <div class="text-right">
+                    <span id="days-left-badge" class="text-[10px] font-medium bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded-full border border-indigo-500/30">Calculating</span>
                 </div>
             </div>
 
-            <!-- Circular Progress Ring / Visualizer -->
-            <div class="relative w-40 h-40 flex items-center justify-center my-1 z-10">
-                <svg class="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
-                    <!-- Track background -->
-                    <circle cx="60" cy="60" r="50" stroke="currentColor" stroke-width="8" class="text-slate-800/80" fill="none" />
-                    <!-- Progress Arc -->
-                    <circle id="progress-ring" cx="60" cy="60" r="50" stroke="url(#progress-gradient)" stroke-width="8" stroke-linecap="round" fill="none" stroke-dasharray="314.159" stroke-dashoffset="314.159" style="transition: stroke-dashoffset 0.4s cubic-bezier(0.4, 0, 0.2, 1);" />
-                    <!-- Gradient definition -->
-                    <defs>
-                        <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#6366f1" />
-                            <stop offset="50%" stop-color="#8b5cf6" />
-                            <stop offset="100%" stop-color="#06b6d4" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <!-- Inner pill / icon -->
-                <div class="absolute flex flex-col items-center justify-center text-center">
-                    <svg class="w-6 h-6 text-indigo-400 mb-0.5 animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span id="days-left-badge" class="text-[10px] text-slate-400 font-medium tracking-wider uppercase">Calculating</span>
-                </div>
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-950/80 rounded-full h-2.5 p-0.5 border border-slate-800 relative overflow-hidden my-1">
+                <div id="progress-bar-fill" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
             </div>
 
-            <!-- Mini stats row -->
-            <div class="grid grid-cols-2 gap-3 w-full mt-5 z-10">
-                <div class="bg-slate-950/40 border border-slate-800/60 rounded-2xl p-2.5 text-center">
-                    <span class="text-[10px] uppercase font-semibold text-slate-400 block">Days Passed</span>
-                    <span id="days-passed" class="text-base font-bold text-slate-200">0</span>
-                </div>
-                <div class="bg-slate-950/40 border border-slate-800/60 rounded-2xl p-2.5 text-center">
-                    <span class="text-[10px] uppercase font-semibold text-slate-400 block">Days Remaining</span>
-                    <span id="days-remaining" class="text-base font-bold text-slate-200">0</span>
-                </div>
+            <div class="flex justify-between text-[10px] text-slate-400 font-medium mb-3">
+                <span>Passed: <strong id="days-passed" class="text-slate-200">0</strong>d</span>
+                <span>Remaining: <strong id="days-remaining" class="text-slate-200">0</strong>d</span>
             </div>
 
+            <!-- Embedded Term Time Ticker (Countdown to June 20, 2027) -->
+            <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl py-2 px-3 flex justify-around items-center">
+                <div class="text-center">
+                    <span id="term-days" class="text-xs font-bold text-indigo-300 block">00</span>
+                    <span class="text-[8px] uppercase tracking-widest text-slate-400">Days</span>
+                </div>
+                <div class="text-slate-700 font-bold">:</div>
+                <div class="text-center">
+                    <span id="term-hours" class="text-xs font-bold text-indigo-300 block">00</span>
+                    <span class="text-[8px] uppercase tracking-widest text-slate-400">Hours</span>
+                </div>
+                <div class="text-slate-700 font-bold">:</div>
+                <div class="text-center">
+                    <span id="term-mins" class="text-xs font-bold text-indigo-300 block">00</span>
+                    <span class="text-[8px] uppercase tracking-widest text-slate-400">Mins</span>
+                </div>
+                <div class="text-slate-700 font-bold">:</div>
+                <div class="text-center">
+                    <span id="term-secs" class="text-xs font-bold text-cyan-300 block">00</span>
+                    <span class="text-[8px] uppercase tracking-widest text-slate-400">Secs</span>
+                </div>
+            </div>
         </div>
+
+        <!-- Card 2: Next Holiday Countdown -->
+        <div class="w-full bg-slate-900/70 backdrop-blur-xl border border-amber-500/20 rounded-2xl p-4 shadow-xl glow-holiday flex flex-col relative overflow-hidden">
+            <div class="absolute -bottom-10 -left-10 w-24 h-24 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
+
+            <div class="flex justify-between items-start mb-2">
+                <div>
+                    <span class="text-[10px] uppercase font-semibold text-amber-400 tracking-wider block">Next School Holiday</span>
+                    <h2 id="holiday-name" class="text-base font-bold text-white tracking-wide truncate max-w-[200px]">Loading Holiday...</h2>
+                </div>
+                <div class="text-right">
+                    <span id="holiday-dates-badge" class="text-[10px] font-medium bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/30">--</span>
+                </div>
+            </div>
+
+            <!-- Holiday Countdown Ticker -->
+            <div class="grid grid-cols-4 gap-1.5 my-1.5 text-center">
+                <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl py-1.5 px-1">
+                    <span id="h-days" class="text-sm font-bold text-amber-300 block">00</span>
+                    <span class="text-[8px] uppercase tracking-wider text-slate-400">Days</span>
+                </div>
+                <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl py-1.5 px-1">
+                    <span id="h-hours" class="text-sm font-bold text-amber-300 block">00</span>
+                    <span class="text-[8px] uppercase tracking-wider text-slate-400">Hours</span>
+                </div>
+                <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl py-1.5 px-1">
+                    <span id="h-mins" class="text-sm font-bold text-amber-300 block">00</span>
+                    <span class="text-[8px] uppercase tracking-wider text-slate-400">Mins</span>
+                </div>
+                <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl py-1.5 px-1">
+                    <span id="h-secs" class="text-sm font-bold text-cyan-300 block">00</span>
+                    <span class="text-[8px] uppercase tracking-wider text-slate-400">Secs</span>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center text-[10px] text-slate-400 pt-1 border-t border-slate-800/60 mt-1">
+                <span id="holiday-status-msg" class="font-medium text-slate-300">Duration: 0 days</span>
+                <span class="text-slate-500">Ministry of Education</span>
+            </div>
+        </div>
+
     </main>
 
-    <!-- Breakdown Countdown Ticker Footer -->
-    <footer class="w-full max-w-sm pb-2 shrink-0">
-        <div class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-3 flex justify-around items-center text-center">
-            <div>
-                <span id="hours-val" class="text-sm font-bold text-indigo-300 block">00</span>
-                <span class="text-[9px] uppercase tracking-widest text-slate-400">Hours</span>
-            </div>
-            <div class="text-slate-700 font-bold">:</div>
-            <div>
-                <span id="mins-val" class="text-sm font-bold text-indigo-300 block">00</span>
-                <span class="text-[9px] uppercase tracking-widest text-slate-400">Minutes</span>
-            </div>
-            <div class="text-slate-700 font-bold">:</div>
-            <div>
-                <span id="secs-val" class="text-sm font-bold text-indigo-300 block">00</span>
-                <span class="text-[9px] uppercase tracking-widest text-slate-400">Seconds</span>
-            </div>
-            <div class="text-slate-700 font-bold">:</div>
-            <div>
-                <span id="millis-val" class="text-sm font-bold text-cyan-300 block">000</span>
-                <span class="text-[9px] uppercase tracking-widest text-slate-400">Millis</span>
-            </div>
-        </div>
-        <div class="text-center mt-2">
-            <span class="text-[10px] text-slate-500">Target Date: June 20, <span id="target-year">2027</span></span>
+    <!-- Footer Ticker -->
+    <footer class="w-full max-w-sm pb-1 shrink-0 text-center">
+        <div class="bg-slate-900/40 border border-slate-800/60 rounded-xl py-2 px-3 flex justify-between items-center text-[10px] text-slate-400">
+            <span>Israeli High School Schedule</span>
+            <span class="font-medium text-slate-300">תשפ"ז (2026–2027)</span>
         </div>
     </footer>
 
     <script>
-        // Calculate academic year dates dynamically
-        function getAcademicDates(now) {
-            const currentYear = now.getFullYear();
-            let startYear = currentYear;
-            let endYear = currentYear + 1;
-
-            // If current date is before September 1st, the academic year started previous year
-            const tempStartThisYear = new Date(currentYear, 8, 1, 0, 0, 0, 0); // Sep 1
-            if (now < tempStartThisYear) {
-                startYear = currentYear - 1;
-                endYear = currentYear;
+        // Israeli High School Holiday Schedule 2026–2027 (תשפ"ז)
+        const holidays = [
+            {
+                name: "Rosh Hashanah",
+                start: new Date(2026, 8, 11, 0, 0, 0), // Sep 11, 2026
+                end: new Date(2026, 8, 13, 23, 59, 59), // Sep 13, 2026
+                display: "Sep 11–13"
+            },
+            {
+                name: "Yom Kippur & Sukkot",
+                start: new Date(2026, 8, 20, 0, 0, 0), // Sep 20, 2026
+                end: new Date(2026, 9, 4, 0, 0, 0), // Oct 4, 2026
+                display: "Sep 20 – Oct 4"
+            },
+            {
+                name: "Hanukkah",
+                start: new Date(2026, 11, 6, 0, 0, 0), // Dec 6, 2026
+                end: new Date(2026, 11, 12, 23, 59, 59), // Dec 12, 2026
+                display: "Dec 6–12"
+            },
+            {
+                name: "Purim",
+                start: new Date(2027, 2, 23, 0, 0, 0), // Mar 23, 2027
+                end: new Date(2027, 2, 24, 23, 59, 59), // Mar 24, 2027
+                display: "Mar 23–24"
+            },
+            {
+                name: "Passover (Pesach)",
+                start: new Date(2027, 3, 13, 0, 0, 0), // Apr 13, 2027
+                end: new Date(2027, 3, 28, 23, 59, 59), // Apr 28, 2027
+                display: "Apr 13–28"
+            },
+            {
+                name: "Independence Day",
+                start: new Date(2027, 4, 12, 0, 0, 0), // May 12, 2027
+                end: new Date(2027, 4, 12, 23, 59, 59), // May 12, 2027
+                display: "May 12"
+            },
+            {
+                name: "Shavuot",
+                start: new Date(2027, 5, 10, 0, 0, 0), // Jun 10, 2027
+                end: new Date(2027, 5, 11, 23, 59, 59), // Jun 11, 2027
+                display: "Jun 10–11"
+            },
+            {
+                name: "Summer Vacation",
+                start: new Date(2027, 5, 21, 0, 0, 0), // Jun 21, 2027
+                end: new Date(2027, 7, 31, 23, 59, 59),
+                display: "Starts Jun 21"
             }
+        ];
 
-            const startDate = new Date(startYear, 8, 1, 0, 0, 0, 0); // September 1st
-            const endDate = new Date(endYear, 5, 20, 23, 59, 59, 999); // June 20th
-
-            return { startDate, endDate, endYear };
+        function getAcademicTerm(now) {
+            const start = new Date(2026, 8, 1, 0, 0, 0, 0); // Sep 1, 2026
+            const end = new Date(2027, 5, 20, 23, 59, 59, 999); // June 20, 2027
+            return { start, end };
         }
 
-        const circumference = 2 * Math.PI * 50; // Radius is 50 -> ~314.159
-
-        function updateTracker() {
+        function updateAllTrackers() {
             const now = new Date();
-            const { startDate, endDate, endYear } = getAcademicDates(now);
+            const term = getAcademicTerm(now);
 
-            document.getElementById('target-year').textContent = endYear;
+            // 1. Academic Year Progress & Term Countdown
+            const totalDuration = term.end.getTime() - term.start.getTime();
+            const elapsed = now.getTime() - term.start.getTime();
+            let pct = (elapsed / totalDuration) * 100;
+            if (pct < 0) pct = 0;
+            if (pct > 100) pct = 100;
 
-            const totalDuration = endDate.getTime() - startDate.getTime();
-            const elapsed = now.getTime() - startDate.getTime();
+            document.getElementById('percentage-display').textContent = pct.toFixed(7) + '%';
+            document.getElementById('progress-bar-fill').style.width = pct + '%';
 
-            let percentage = (elapsed / totalDuration) * 100;
-            
-            // Clamp percentage between 0 and 100 for display safety
-            if (percentage < 0) percentage = 0;
-            if (percentage > 100) percentage = 100;
-
-            // Format unrounded percentage with 7 decimal places for smooth real-time decimal rolling
-            document.getElementById('percentage-display').textContent = percentage.toFixed(7) + '%';
-
-            // Update circular ring offset
-            const ring = document.getElementById('progress-ring');
-            const offset = circumference - (percentage / 100) * circumference;
-            ring.style.strokeDashoffset = offset;
-
-            // Days calculation
-            const diffToEnd = endDate.getTime() - now.getTime();
+            const diffToEnd = term.end.getTime() - now.getTime();
             const daysRemaining = Math.max(0, Math.ceil(diffToEnd / (1000 * 60 * 60 * 24)));
             const daysPassed = Math.max(0, Math.floor(elapsed / (1000 * 60 * 60 * 24)));
 
             document.getElementById('days-passed').textContent = daysPassed;
             document.getElementById('days-remaining').textContent = daysRemaining;
-            document.getElementById('days-left-badge').textContent = daysRemaining + 'd left';
+            document.getElementById('days-left-badge').textContent = daysRemaining + 'd left in term';
 
-            // Live remaining time components
+            // Term Countdown to June 20, 2027
             if (diffToEnd > 0) {
-                const hours = Math.floor((diffToEnd % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diffToEnd % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diffToEnd % (1000 * 60)) / 1000);
-                const millis = Math.floor(diffToEnd % 1000);
+                const tDays = Math.floor(diffToEnd / (1000 * 60 * 60 * 24));
+                const tHours = Math.floor((diffToEnd % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const tMins = Math.floor((diffToEnd % (1000 * 60 * 60)) / (1000 * 60));
+                const tSecs = Math.floor((diffToEnd % (1000 * 60)) / 1000);
 
-                document.getElementById('hours-val').textContent = String(hours).padStart(2, '0');
-                document.getElementById('mins-val').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('secs-val').textContent = String(seconds).padStart(2, '0');
-                document.getElementById('millis-val').textContent = String(millis).padStart(3, '0');
-                document.getElementById('live-status').textContent = 'Live Tracker';
+                document.getElementById('term-days').textContent = String(tDays).padStart(2, '0');
+                document.getElementById('term-hours').textContent = String(tHours).padStart(2, '0');
+                document.getElementById('term-mins').textContent = String(tMins).padStart(2, '0');
+                document.getElementById('term-secs').textContent = String(tSecs).padStart(2, '0');
             } else {
-                document.getElementById('hours-val').textContent = '00';
-                document.getElementById('mins-val').textContent = '00';
-                document.getElementById('secs-val').textContent = '00';
-                document.getElementById('millis-val').textContent = '000';
-                document.getElementById('live-status').textContent = 'Term Completed';
+                document.getElementById('term-days').textContent = '00';
+                document.getElementById('term-hours').textContent = '00';
+                document.getElementById('term-mins').textContent = '00';
+                document.getElementById('term-secs').textContent = '00';
+            }
+
+            // 2. Next Upcoming Holiday Logic
+            let nextHoliday = null;
+
+            for (let h of holidays) {
+                if (now < h.start) {
+                    nextHoliday = h;
+                    break;
+                }
+            }
+
+            if (!nextHoliday) {
+                nextHoliday = holidays[holidays.length - 1];
+            }
+
+            document.getElementById('holiday-name').textContent = nextHoliday.name;
+            document.getElementById('holiday-dates-badge').textContent = nextHoliday.display;
+
+            const holidayDurationDays = Math.round((nextHoliday.end.getTime() - nextHoliday.start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+            document.getElementById('holiday-status-msg').textContent = `Duration: ~${holidayDurationDays} day${holidayDurationDays > 1 ? 's' : ''}`;
+
+            const holidayDiff = nextHoliday.start.getTime() - now.getTime();
+
+            if (holidayDiff > 0) {
+                const hDays = Math.floor(holidayDiff / (1000 * 60 * 60 * 24));
+                const hHours = Math.floor((holidayDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const hMins = Math.floor((holidayDiff % (1000 * 60 * 60)) / (1000 * 60));
+                const hSecs = Math.floor((holidayDiff % (1000 * 60)) / 1000);
+
+                document.getElementById('h-days').textContent = String(hDays).padStart(2, '0');
+                document.getElementById('h-hours').textContent = String(hHours).padStart(2, '0');
+                document.getElementById('h-mins').textContent = String(hMins).padStart(2, '0');
+                document.getElementById('h-secs').textContent = String(hSecs).padStart(2, '0');
+            } else {
+                document.getElementById('h-days').textContent = '00';
+                document.getElementById('h-hours').textContent = '00';
+                document.getElementById('h-mins').textContent = '00';
+                document.getElementById('h-secs').textContent = '00';
             }
         }
 
-        // Run immediately and update via requestAnimationFrame for ultra-smooth real-time decimal counting
-        function frameLoop() {
-            updateTracker();
-            requestAnimationFrame(frameLoop);
+        function runLoop() {
+            updateAllTrackers();
+            requestAnimationFrame(runLoop);
         }
 
         window.onload = function() {
-            requestAnimationFrame(frameLoop);
+            requestAnimationFrame(runLoop);
         };
     </script>
 </body>
