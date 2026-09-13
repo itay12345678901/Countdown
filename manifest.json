@@ -1,8 +1,8 @@
 {
   "name": "Academic & Holiday Tracker",
   "short_name": "School Tracker",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "https://itay12345678901.github.io/",
+  "scope": "https://itay12345678901.github.io/",
   "display": "standalone",
   "background_color": "#080c14",
   "theme_color": "#080c14",
