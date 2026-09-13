@@ -1,7 +1,8 @@
 {
   "name": "Academic & Holiday Tracker",
   "short_name": "School Tracker",
-  "start_url": "./index.html",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#080c14",
   "theme_color": "#080c14",
@@ -13,7 +14,7 @@
     },
     {
       "src": "icon-512.png",
-      "sizes": "512x192",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
