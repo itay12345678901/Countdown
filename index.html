@@ -18,9 +18,9 @@
                     },
                     colors: {
                         appBg: '#090d16',
-                        cardBg: '#161d2e',
-                        cardSubBg: '#0f1422',
-                        cardBorder: 'rgba(255, 255, 255, 0.12)',
+                        cardBg: '#182238',
+                        cardSubBg: '#0f172a',
+                        cardBorder: 'rgba(255, 255, 255, 0.16)',
                     }
                 }
             }
@@ -44,18 +44,18 @@
         }
         .mesh-bg {
             background-image: 
-                radial-gradient(at 10% 15%, rgba(99, 102, 241, 0.15) 0px, transparent 55%),
-                radial-gradient(at 90% 85%, rgba(245, 158, 11, 0.12) 0px, transparent 55%),
+                radial-gradient(at 10% 15%, rgba(99, 102, 241, 0.18) 0px, transparent 55%),
+                radial-gradient(at 90% 85%, rgba(245, 158, 11, 0.15) 0px, transparent 55%),
                 radial-gradient(at 50% 50%, rgba(9, 13, 22, 1) 0px, transparent 100%);
         }
         .glass-card {
-            background: #161d2e;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            background: #182238;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         .glass-subcard {
-            background: #0f1422;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
         }
         .tabular-nums {
@@ -69,9 +69,9 @@
     <header class="w-full max-w-sm flex items-center justify-between py-1 shrink-0">
         <div>
             <h1 class="font-display font-black text-xs uppercase tracking-widest text-indigo-400">Academic Schedule</h1>
-            <p class="text-[11px] font-medium text-slate-300">Sept 1, 2026 - Jun 20, 2027</p>
+            <p class="text-[11px] font-medium text-slate-200">Sept 1, 2026 - Jun 20, 2027</p>
         </div>
-        <div class="flex items-center space-x-2 bg-[#161d2e] border border-slate-700/80 px-3 py-1 rounded-full shadow-lg">
+        <div class="flex items-center space-x-2 bg-[#182238] border border-slate-600 px-3 py-1 rounded-full shadow-lg">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -90,44 +90,41 @@
 
             <div class="flex justify-between items-start mb-2">
                 <div>
-                    <span class="font-display font-bold text-[10px] tracking-wider uppercase text-indigo-400 block mb-0.5">Year Progress</span>
-                    <div id="percentage-display" class="font-display font-black text-3xl sm:text-4xl tracking-tight text-white tabular-nums leading-none">0.000%</div>
+                    <span class="font-display font-bold text-[10px] tracking-wider uppercase text-indigo-400 block mb-0.5">ACADEMIC PROGRESS (2026-2027)</span>
+                    <div id="percentage-display" class="font-display font-black text-2xl sm:text-3xl tracking-tight text-white tabular-nums leading-none">0.0000000%</div>
                 </div>
                 <div class="text-right">
-                    <span id="days-left-badge" class="font-semibold text-[10px] bg-indigo-500/20 text-indigo-300 px-3 py-1 rounded-full border border-indigo-500/40 tabular-nums">-- days left</span>
+                    <span id="days-left-badge" class="font-semibold text-[10px] bg-indigo-500/20 text-indigo-200 px-3 py-1 rounded-full border border-indigo-500/40 tabular-nums">-- days left</span>
                 </div>
             </div>
 
             <!-- Progress Bar -->
-            <div class="w-full bg-[#0f1422] rounded-full h-3 p-0.5 border border-slate-700/80 relative overflow-hidden my-2">
+            <div class="w-full bg-[#0f172a] rounded-full h-3 p-0.5 border border-slate-600 relative overflow-hidden my-2">
                 <div id="progress-bar-fill" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 h-full rounded-full transition-all duration-300 shadow-md shadow-indigo-500/50" style="width: 0%"></div>
             </div>
 
-            <div class="flex justify-between text-[11px] text-slate-300 font-medium mb-2.5">
+            <div class="flex justify-between text-[11px] text-slate-200 font-medium mb-3">
                 <span>Elapsed: <strong id="days-passed" class="text-white font-semibold tabular-nums">0</strong> days</span>
                 <span>Remaining: <strong id="days-remaining" class="text-white font-semibold tabular-nums">0</strong> days</span>
             </div>
 
-            <!-- Embedded Live Countdown Timer to June 20, 2027 -->
-            <div class="glass-subcard rounded-xl p-2.5 grid grid-cols-7 gap-1 text-center items-center">
-                <div class="flex flex-col items-center justify-center">
-                    <span id="term-days" class="font-display font-black text-base sm:text-lg text-indigo-300 block tabular-nums leading-none">00</span>
-                    <span class="text-[8px] font-semibold text-slate-300 uppercase tracking-widest mt-1 block">Days</span>
+            <!-- Embedded Live Countdown Timer to June 20, 2027 (Space-separated modular blocks, unified text color) -->
+            <div class="grid grid-cols-4 gap-1.5">
+                <div class="glass-subcard rounded-xl py-2 px-1 text-center flex flex-col items-center justify-center">
+                    <span id="term-days" class="font-display font-black text-base sm:text-lg text-indigo-200 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-bold text-slate-300 uppercase tracking-widest mt-1 block">DAYS</span>
                 </div>
-                <div class="text-indigo-400 font-black text-sm flex items-center justify-center">:</div>
-                <div class="flex flex-col items-center justify-center">
-                    <span id="term-hours" class="font-display font-black text-base sm:text-lg text-indigo-300 block tabular-nums leading-none">00</span>
-                    <span class="text-[8px] font-semibold text-slate-300 uppercase tracking-widest mt-1 block">Hrs</span>
+                <div class="glass-subcard rounded-xl py-2 px-1 text-center flex flex-col items-center justify-center">
+                    <span id="term-hours" class="font-display font-black text-base sm:text-lg text-indigo-200 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-bold text-slate-300 uppercase tracking-widest mt-1 block">HRS</span>
                 </div>
-                <div class="text-indigo-400 font-black text-sm flex items-center justify-center">:</div>
-                <div class="flex flex-col items-center justify-center">
-                    <span id="term-mins" class="font-display font-black text-base sm:text-lg text-indigo-300 block tabular-nums leading-none">00</span>
-                    <span class="text-[8px] font-semibold text-slate-300 uppercase tracking-widest mt-1 block">Min</span>
+                <div class="glass-subcard rounded-xl py-2 px-1 text-center flex flex-col items-center justify-center">
+                    <span id="term-mins" class="font-display font-black text-base sm:text-lg text-indigo-200 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-bold text-slate-300 uppercase tracking-widest mt-1 block">MIN</span>
                 </div>
-                <div class="text-indigo-400 font-black text-sm flex items-center justify-center">:</div>
-                <div class="flex flex-col items-center justify-center">
-                    <span id="term-secs" class="font-display font-black text-base sm:text-lg text-cyan-300 block tabular-nums leading-none">00</span>
-                    <span class="text-[8px] font-semibold text-slate-300 uppercase tracking-widest mt-1 block">Sec</span>
+                <div class="glass-subcard rounded-xl py-2 px-1 text-center flex flex-col items-center justify-center">
+                    <span id="term-secs" class="font-display font-black text-base sm:text-lg text-indigo-200 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-bold text-slate-300 uppercase tracking-widest mt-1 block">SEC</span>
                 </div>
             </div>
         </div>
@@ -139,37 +136,37 @@
 
             <div class="flex justify-between items-start mb-2.5">
                 <div>
-                    <span class="font-display font-bold text-[10px] tracking-wider uppercase text-amber-400 block mb-0.5">Next Holiday</span>
+                    <span class="font-display font-bold text-[10px] tracking-wider uppercase text-amber-400 block mb-0.5">NEXT HOLIDAY (5787)</span>
                     <h2 id="holiday-name" class="font-display font-extrabold text-base sm:text-lg text-white tracking-wide truncate max-w-[190px]">Loading...</h2>
                 </div>
                 <div class="text-right">
-                    <span id="holiday-dates-badge" class="font-semibold text-[10px] bg-indigo-500/20 text-indigo-300 px-3 py-1 rounded-full border border-indigo-500/40">--</span>
+                    <span id="holiday-dates-badge" class="font-semibold text-[10px] bg-indigo-500/20 text-indigo-200 px-3 py-1 rounded-full border border-indigo-500/40">--</span>
                 </div>
             </div>
 
-            <!-- Holiday Countdown Ticker (Days, Hours, Minutes, Seconds) with Perfectly Centered Digits -->
+            <!-- Holiday Countdown Ticker (Days, Hours, Minutes, Seconds with Space-Separated Modular Blocks) -->
             <div class="grid grid-cols-4 gap-2 mb-2.5">
                 <div class="glass-subcard rounded-xl py-2 px-1 text-center flex flex-col items-center justify-center">
-                    <span id="h-days" class="font-display font-black text-lg sm:text-xl text-amber-300 block tabular-nums leading-none">00</span>
-                    <span class="text-[8px] font-semibold text-slate-300 uppercase tracking-widest mt-1 block">Days</span>
+                    <span id="h-days" class="font-display font-black text-lg sm:text-xl text-amber-200 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-bold text-slate-300 uppercase tracking-widest mt-1 block">DAYS</span>
                 </div>
                 <div class="glass-subcard rounded-xl py-2 px-1 text-center flex flex-col items-center justify-center">
-                    <span id="h-hours" class="font-display font-black text-lg sm:text-xl text-amber-300 block tabular-nums leading-none">00</span>
-                    <span class="text-[8px] font-semibold text-slate-300 uppercase tracking-widest mt-1 block">Hrs</span>
+                    <span id="h-hours" class="font-display font-black text-lg sm:text-xl text-amber-200 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-bold text-slate-300 uppercase tracking-widest mt-1 block">HRS</span>
                 </div>
                 <div class="glass-subcard rounded-xl py-2 px-1 text-center flex flex-col items-center justify-center">
-                    <span id="h-mins" class="font-display font-black text-lg sm:text-xl text-amber-300 block tabular-nums leading-none">00</span>
-                    <span class="text-[8px] font-semibold text-slate-300 uppercase tracking-widest mt-1 block">Min</span>
+                    <span id="h-mins" class="font-display font-black text-lg sm:text-xl text-amber-200 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-bold text-slate-300 uppercase tracking-widest mt-1 block">MIN</span>
                 </div>
                 <div class="glass-subcard rounded-xl py-2 px-1 text-center flex flex-col items-center justify-center">
-                    <span id="h-secs" class="font-display font-black text-lg sm:text-xl text-cyan-300 block tabular-nums leading-none">00</span>
-                    <span class="text-[8px] font-semibold text-slate-300 uppercase tracking-widest mt-1 block">Sec</span>
+                    <span id="h-secs" class="font-display font-black text-lg sm:text-xl text-amber-200 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-bold text-slate-300 uppercase tracking-widest mt-1 block">SEC</span>
                 </div>
             </div>
 
-            <div class="flex justify-between items-center text-[11px] text-slate-300 pt-2 border-t border-slate-700/80">
-                <span id="holiday-status-msg" class="font-medium text-slate-200">Status: Calculating...</span>
-                <span class="font-semibold text-slate-400">Israel Education</span>
+            <div class="flex justify-between items-center text-[11px] text-slate-200 pt-2 border-t border-slate-600">
+                <span id="holiday-status-msg" class="font-medium text-slate-100">Status: Calculating...</span>
+                <span class="font-semibold text-slate-300">Israel Education</span>
             </div>
         </div>
 
@@ -177,14 +174,15 @@
 
     <!-- Footer -->
     <footer class="w-full max-w-sm pb-1 shrink-0 text-center">
-        <div class="glass-subcard rounded-xl py-1.5 px-3 flex justify-between items-center text-[11px] text-slate-300">
-            <span class="font-medium text-slate-300">Israeli High School Schedule</span>
-            <span class="font-bold text-indigo-400">5787 (2026-2027)</span>
+        <div class="glass-subcard rounded-xl py-1.5 px-3 flex justify-between items-center text-[11px] text-slate-200">
+            <span class="font-medium text-slate-200">Israeli High School Schedule</span>
+            <span class="font-bold text-indigo-400">5787</span>
         </div>
     </footer>
 
+    <!-- Script Logic -->
     <script>
-        // Official Israeli High School Holiday Schedule 2026-2027
+        // Official Israeli High School Holiday Schedule 2026-2027 (5787)
         const holidays = [
             {
                 name: "Rosh Hashanah",
@@ -246,14 +244,14 @@
             const now = new Date();
             const term = getAcademicTerm();
 
-            // 1. Academic Year Progress Calculation (3-decimal percentage)
+            // 1. Academic Year Progress Calculation (Exact unrounded multi-decimal percentage)
             const totalDuration = term.end.getTime() - term.start.getTime();
             const elapsed = now.getTime() - term.start.getTime();
             let pct = (elapsed / totalDuration) * 100;
             if (pct < 0) pct = 0;
             if (pct > 100) pct = 100;
 
-            document.getElementById('percentage-display').textContent = pct.toFixed(3) + '%';
+            document.getElementById('percentage-display').textContent = pct.toFixed(7) + '%';
             document.getElementById('progress-bar-fill').style.width = pct + '%';
 
             const diffToEnd = term.end.getTime() - now.getTime();
@@ -264,7 +262,7 @@
             document.getElementById('days-remaining').textContent = daysRemaining;
             document.getElementById('days-left-badge').textContent = daysRemaining + ' days left';
 
-            // Embedded Countdown to June 20, 2027
+            // Embedded Countdown to June 20, 2027 (Space-separated modular blocks)
             if (diffToEnd > 0) {
                 const tDays = Math.floor(diffToEnd / (1000 * 60 * 60 * 24));
                 const tHours = Math.floor((diffToEnd % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -282,7 +280,7 @@
                 document.getElementById('term-secs').textContent = '00';
             }
 
-            // 2. Dynamic Next Holiday Countdown (Correct chronological detection)
+            // 2. Dynamic Next Holiday Countdown (Correct chronological auto-cycling)
             let nextHoliday = null;
             for (let h of holidays) {
                 if (now < h.end) {
