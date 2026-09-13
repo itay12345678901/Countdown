@@ -6,22 +6,20 @@
     <title>Academic & Holiday Tracker</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Outfit -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
                     },
                     colors: {
-                        darkBg: '#080c14',
-                        cardBg: '#111827',
-                        cardBorder: '#1f293d',
-                        accentIndigo: '#6366f1',
-                        accentCyan: '#06b6d4',
-                        accentAmber: '#f59e0b',
+                        obsidian: '#030712',
+                        surface: '#0b0f19',
+                        surfaceBorder: '#1f2937',
                     }
                 }
             }
@@ -39,203 +37,223 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #080c14;
-            color: #f8fafc;
-            font-family: 'Outfit', sans-serif;
+            background-color: #030712;
+            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
         }
-        .glow-aura {
-            box-shadow: 0 0 40px -10px rgba(99, 102, 241, 0.2);
+        .mesh-bg {
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(79, 70, 229, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(147, 51, 234, 0.12) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(15, 23, 42, 1) 0px, transparent 100%);
         }
-        .glow-holiday {
-            box-shadow: 0 0 40px -10px rgba(245, 158, 11, 0.2);
+        .glass-card {
+            background: rgba(11, 15, 25, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
-        .bg-radial-gradient {
-            background: radial-gradient(circle at 50% 0%, #161b33 0%, #080c14 75%);
+        .glass-subcard {
+            background: rgba(3, 7, 18, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+        .glow-indigo {
+            box-shadow: 0 0 40px -10px rgba(99, 102, 241, 0.35);
+        }
+        .glow-amber {
+            box-shadow: 0 0 40px -10px rgba(245, 158, 11, 0.35);
+        }
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
         }
     </style>
 </head>
-<body class="bg-radial-gradient flex flex-col justify-between items-center h-full w-full p-3 overflow-hidden">
+<body class="mesh-bg flex flex-col justify-between items-center h-full w-full p-3 overflow-hidden">
 
-    <!-- Top Header -->
-    <header class="w-full max-w-sm flex items-center justify-between pt-1 pb-1 shrink-0">
+    <!-- Header -->
+    <header class="w-full max-w-sm flex items-center justify-between py-1 shrink-0">
         <div>
-            <h1 class="text-[11px] uppercase tracking-widest text-indigo-400 font-semibold">IL School Year 2026–27</h1>
-            <p class="text-xs font-medium text-slate-300">Sep 1 – Jun 20</p>
+            <h1 class="font-display font-black text-xs uppercase tracking-widest text-indigo-400">Academic Schedule</h1>
+            <p class="text-[11px] font-medium text-slate-400">Sept 1, 2026 - Jun 20, 2027</p>
         </div>
-        <div class="flex items-center space-x-1.5 bg-slate-900/90 border border-slate-800 px-2.5 py-1 rounded-full shadow-inner">
+        <div class="flex items-center space-x-2 bg-slate-900/80 border border-slate-800 px-3 py-1 rounded-full shadow-lg">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span class="text-[11px] font-medium text-emerald-400 tracking-wide">Live Sync</span>
+            <span class="text-[10px] font-bold tracking-wider text-emerald-400 uppercase">Live</span>
         </div>
     </header>
 
-    <!-- Main Centerpiece Container (No Scrolling) -->
-    <main class="w-full max-w-sm flex-1 flex flex-col justify-center space-y-3 my-auto min-h-0">
+    <!-- Main Centerpiece Container (Zero Scrolling) -->
+    <main class="w-full max-w-sm flex-1 flex flex-col justify-center space-y-3.5 my-auto min-h-0">
         
-        <!-- Card 1: School Year Progress & Term Countdown -->
-        <div class="w-full bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-4 shadow-xl glow-aura flex flex-col relative overflow-hidden">
-            <div class="absolute -top-10 -right-10 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl pointer-events-none"></div>
-            
+        <!-- Card 1: Academic Year Progress & Embedded Countdown to June 20, 2027 -->
+        <div class="w-full glass-card rounded-2xl p-4 glow-indigo relative overflow-hidden flex flex-col justify-between">
+            <!-- Decorative light blob -->
+            <div class="absolute -top-16 -right-16 w-36 h-36 bg-indigo-600/20 rounded-full blur-2xl pointer-events-none"></div>
+
             <div class="flex justify-between items-start mb-2">
                 <div>
-                    <span class="text-[10px] uppercase font-semibold text-indigo-400 tracking-wider block">Academic Progress</span>
-                    <div id="percentage-display" class="text-2xl sm:text-3xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent">0.0000000%</div>
+                    <span class="font-display font-bold text-[10px] tracking-wider uppercase text-indigo-400 block mb-0.5">Year Progress</span>
+                    <div id="percentage-display" class="font-display font-black text-3xl sm:text-4xl tracking-tight text-white tabular-nums leading-none">0.0000000%</div>
                 </div>
                 <div class="text-right">
-                    <span id="days-left-badge" class="text-[10px] font-medium bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded-full border border-indigo-500/30">Calculating</span>
+                    <span id="days-left-badge" class="font-semibold text-[10px] bg-indigo-500/15 text-indigo-300 px-2.5 py-1 rounded-full border border-indigo-500/30 tabular-nums">-- days left</span>
                 </div>
             </div>
 
             <!-- Progress Bar -->
-            <div class="w-full bg-slate-950/80 rounded-full h-2.5 p-0.5 border border-slate-800 relative overflow-hidden my-1">
-                <div id="progress-bar-fill" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+            <div class="w-full bg-slate-950 rounded-full h-3 p-0.5 border border-slate-800/80 relative overflow-hidden my-2">
+                <div id="progress-bar-fill" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 h-full rounded-full transition-all duration-300 shadow-md shadow-indigo-500/50" style="width: 0%"></div>
             </div>
 
             <div class="flex justify-between text-[10px] text-slate-400 font-medium mb-3">
-                <span>Passed: <strong id="days-passed" class="text-slate-200">0</strong>d</span>
-                <span>Remaining: <strong id="days-remaining" class="text-slate-200">0</strong>d</span>
+                <span>Elapsed: <strong id="days-passed" class="text-slate-200 tabular-nums">0</strong> days</span>
+                <span>Remaining: <strong id="days-remaining" class="text-slate-200 tabular-nums">0</strong> days</span>
             </div>
 
-            <!-- Embedded Term Time Ticker (Countdown to June 20, 2027) -->
-            <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl py-2 px-3 flex justify-around items-center">
-                <div class="text-center">
-                    <span id="term-days" class="text-xs font-bold text-indigo-300 block">00</span>
-                    <span class="text-[8px] uppercase tracking-widest text-slate-400">Days</span>
+            <!-- Embedded Live Countdown Timer to June 20, 2027 -->
+            <div class="glass-subcard rounded-xl p-2.5 grid grid-cols-7 gap-1 text-center items-center">
+                <div>
+                    <span id="term-days" class="font-display font-black text-base sm:text-lg text-indigo-300 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-semibold text-slate-400 uppercase tracking-widest mt-1 block">Days</span>
                 </div>
-                <div class="text-slate-700 font-bold">:</div>
-                <div class="text-center">
-                    <span id="term-hours" class="text-xs font-bold text-indigo-300 block">00</span>
-                    <span class="text-[8px] uppercase tracking-widest text-slate-400">Hours</span>
+                <div class="text-indigo-500 font-black text-sm">:</div>
+                <div>
+                    <span id="term-hours" class="font-display font-black text-base sm:text-lg text-indigo-300 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-semibold text-slate-400 uppercase tracking-widest mt-1 block">Hrs</span>
                 </div>
-                <div class="text-slate-700 font-bold">:</div>
-                <div class="text-center">
-                    <span id="term-mins" class="text-xs font-bold text-indigo-300 block">00</span>
-                    <span class="text-[8px] uppercase tracking-widest text-slate-400">Mins</span>
+                <div class="text-indigo-500 font-black text-sm">:</div>
+                <div>
+                    <span id="term-mins" class="font-display font-black text-base sm:text-lg text-indigo-300 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-semibold text-slate-400 uppercase tracking-widest mt-1 block">Min</span>
                 </div>
-                <div class="text-slate-700 font-bold">:</div>
-                <div class="text-center">
-                    <span id="term-secs" class="text-xs font-bold text-cyan-300 block">00</span>
-                    <span class="text-[8px] uppercase tracking-widest text-slate-400">Secs</span>
+                <div class="text-indigo-500 font-black text-sm">:</div>
+                <div>
+                    <span id="term-secs" class="font-display font-black text-base sm:text-lg text-cyan-300 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-semibold text-slate-400 uppercase tracking-widest mt-1 block">Sec</span>
                 </div>
             </div>
         </div>
 
-        <!-- Card 2: Next Holiday Countdown -->
-        <div class="w-full bg-slate-900/70 backdrop-blur-xl border border-amber-500/20 rounded-2xl p-4 shadow-xl glow-holiday flex flex-col relative overflow-hidden">
-            <div class="absolute -bottom-10 -left-10 w-24 h-24 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
+        <!-- Card 2: Dynamic Next Holiday Countdown (Auto-cycling) -->
+        <div class="w-full glass-card rounded-2xl p-4 glow-amber relative overflow-hidden flex flex-col justify-between">
+            <!-- Decorative light blob -->
+            <div class="absolute -bottom-16 -left-16 w-36 h-36 bg-amber-600/20 rounded-full blur-2xl pointer-events-none"></div>
 
-            <div class="flex justify-between items-start mb-2">
+            <div class="flex justify-between items-start mb-2.5">
                 <div>
-                    <span class="text-[10px] uppercase font-semibold text-amber-400 tracking-wider block">Next School Holiday</span>
-                    <h2 id="holiday-name" class="text-base font-bold text-white tracking-wide truncate max-w-[200px]">Loading Holiday...</h2>
+                    <span class="font-display font-bold text-[10px] tracking-wider uppercase text-amber-400 block mb-0.5">Next Holiday</span>
+                    <h2 id="holiday-name" class="font-display font-extrabold text-base sm:text-lg text-white tracking-wide truncate max-w-[190px]">Loading...</h2>
                 </div>
                 <div class="text-right">
-                    <span id="holiday-dates-badge" class="text-[10px] font-medium bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/30">--</span>
+                    <span id="holiday-dates-badge" class="font-semibold text-[10px] bg-amber-500/15 text-amber-300 px-2.5 py-1 rounded-full border border-amber-500/30">--</span>
                 </div>
             </div>
 
-            <!-- Holiday Countdown Ticker -->
-            <div class="grid grid-cols-4 gap-1.5 my-1.5 text-center">
-                <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl py-1.5 px-1">
-                    <span id="h-days" class="text-sm font-bold text-amber-300 block">00</span>
-                    <span class="text-[8px] uppercase tracking-wider text-slate-400">Days</span>
+            <!-- Holiday Countdown Ticker (Days, Hours, Minutes, Seconds) -->
+            <div class="grid grid-cols-4 gap-2 mb-2.5">
+                <div class="glass-subcard rounded-xl py-2 px-1 text-center">
+                    <span id="h-days" class="font-display font-black text-lg sm:text-xl text-amber-300 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-semibold text-slate-400 uppercase tracking-widest mt-1 block">Days</span>
                 </div>
-                <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl py-1.5 px-1">
-                    <span id="h-hours" class="text-sm font-bold text-amber-300 block">00</span>
-                    <span class="text-[8px] uppercase tracking-wider text-slate-400">Hours</span>
+                <div class="glass-subcard rounded-xl py-2 px-1 text-center">
+                    <span id="h-hours" class="font-display font-black text-lg sm:text-xl text-amber-300 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-semibold text-slate-400 uppercase tracking-widest mt-1 block">Hrs</span>
                 </div>
-                <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl py-1.5 px-1">
-                    <span id="h-mins" class="text-sm font-bold text-amber-300 block">00</span>
-                    <span class="text-[8px] uppercase tracking-wider text-slate-400">Mins</span>
+                <div class="glass-subcard rounded-xl py-2 px-1 text-center">
+                    <span id="h-mins" class="font-display font-black text-lg sm:text-xl text-amber-300 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-semibold text-slate-400 uppercase tracking-widest mt-1 block">Min</span>
                 </div>
-                <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl py-1.5 px-1">
-                    <span id="h-secs" class="text-sm font-bold text-cyan-300 block">00</span>
-                    <span class="text-[8px] uppercase tracking-wider text-slate-400">Secs</span>
+                <div class="glass-subcard rounded-xl py-2 px-1 text-center">
+                    <span id="h-secs" class="font-display font-black text-lg sm:text-xl text-cyan-300 block tabular-nums leading-none">00</span>
+                    <span class="text-[8px] font-semibold text-slate-400 uppercase tracking-widest mt-1 block">Sec</span>
                 </div>
             </div>
 
-            <div class="flex justify-between items-center text-[10px] text-slate-400 pt-1 border-t border-slate-800/60 mt-1">
-                <span id="holiday-status-msg" class="font-medium text-slate-300">Duration: 0 days</span>
-                <span class="text-slate-500">Ministry of Education</span>
+            <div class="flex justify-between items-center text-[10px] text-slate-400 pt-2 border-t border-slate-800/80">
+                <span id="holiday-status-msg" class="font-medium text-slate-300">Status: Calculating...</span>
+                <span class="font-bold text-slate-500">Ministry of Education</span>
             </div>
         </div>
 
     </main>
 
-    <!-- Footer Ticker -->
+    <!-- Footer -->
     <footer class="w-full max-w-sm pb-1 shrink-0 text-center">
-        <div class="bg-slate-900/40 border border-slate-800/60 rounded-xl py-2 px-3 flex justify-between items-center text-[10px] text-slate-400">
-            <span>Israeli High School Schedule</span>
-            <span class="font-medium text-slate-300">תשפ"ז (2026–2027)</span>
+        <div class="glass-subcard rounded-xl py-1.5 px-3 flex justify-between items-center text-[10px] text-slate-400">
+            <span class="font-medium text-slate-300">Israeli High School Schedule</span>
+            <span class="font-bold text-indigo-400">5787 (2026-2027)</span>
         </div>
     </footer>
 
     <script>
-        // Israeli High School Holiday Schedule 2026–2027 (תשפ"ז)
+        // Official Israeli High School Holiday Schedule 2026-2027
         const holidays = [
             {
                 name: "Rosh Hashanah",
-                start: new Date(2026, 8, 11, 0, 0, 0), // Sep 11, 2026
-                end: new Date(2026, 8, 13, 23, 59, 59), // Sep 13, 2026
-                display: "Sep 11–13"
+                start: new Date(2026, 8, 11, 0, 0, 0),
+                end: new Date(2026, 8, 13, 23, 59, 59),
+                display: "Sept 11-13"
             },
             {
                 name: "Yom Kippur & Sukkot",
-                start: new Date(2026, 8, 20, 0, 0, 0), // Sep 20, 2026
-                end: new Date(2026, 9, 4, 0, 0, 0), // Oct 4, 2026
-                display: "Sep 20 – Oct 4"
+                start: new Date(2026, 8, 20, 0, 0, 0),
+                end: new Date(2026, 9, 5, 23, 59, 59),
+                display: "Sept 20 - Oct 5"
             },
             {
                 name: "Hanukkah",
-                start: new Date(2026, 11, 6, 0, 0, 0), // Dec 6, 2026
-                end: new Date(2026, 11, 12, 23, 59, 59), // Dec 12, 2026
-                display: "Dec 6–12"
+                start: new Date(2026, 11, 6, 0, 0, 0),
+                end: new Date(2026, 11, 12, 23, 59, 59),
+                display: "Dec 6-12"
             },
             {
                 name: "Purim",
-                start: new Date(2027, 2, 23, 0, 0, 0), // Mar 23, 2027
-                end: new Date(2027, 2, 24, 23, 59, 59), // Mar 24, 2027
-                display: "Mar 23–24"
+                start: new Date(2027, 2, 23, 0, 0, 0),
+                end: new Date(2027, 2, 24, 23, 59, 59),
+                display: "Mar 23-24"
             },
             {
                 name: "Passover (Pesach)",
-                start: new Date(2027, 3, 13, 0, 0, 0), // Apr 13, 2027
-                end: new Date(2027, 3, 28, 23, 59, 59), // Apr 28, 2027
-                display: "Apr 13–28"
+                start: new Date(2027, 3, 13, 0, 0, 0),
+                end: new Date(2027, 3, 28, 23, 59, 59),
+                display: "Apr 13-28"
             },
             {
                 name: "Independence Day",
-                start: new Date(2027, 4, 12, 0, 0, 0), // May 12, 2027
-                end: new Date(2027, 4, 12, 23, 59, 59), // May 12, 2027
+                start: new Date(2027, 4, 12, 0, 0, 0),
+                end: new Date(2027, 4, 12, 23, 59, 59),
                 display: "May 12"
             },
             {
                 name: "Shavuot",
-                start: new Date(2027, 5, 10, 0, 0, 0), // Jun 10, 2027
-                end: new Date(2027, 5, 11, 23, 59, 59), // Jun 11, 2027
-                display: "Jun 10–11"
+                start: new Date(2027, 5, 10, 0, 0, 0),
+                end: new Date(2027, 5, 11, 23, 59, 59),
+                display: "Jun 10-11"
             },
             {
-                name: "Summer Vacation",
-                start: new Date(2027, 5, 21, 0, 0, 0), // Jun 21, 2027
+                name: "Summer Break",
+                start: new Date(2027, 5, 21, 0, 0, 0),
                 end: new Date(2027, 7, 31, 23, 59, 59),
-                display: "Starts Jun 21"
+                display: "From Jun 21"
             }
         ];
 
-        function getAcademicTerm(now) {
-            const start = new Date(2026, 8, 1, 0, 0, 0, 0); // Sep 1, 2026
+        function getAcademicTerm() {
+            const start = new Date(2026, 8, 1, 0, 0, 0, 0); // September 1, 2026
             const end = new Date(2027, 5, 20, 23, 59, 59, 999); // June 20, 2027
             return { start, end };
         }
 
-        function updateAllTrackers() {
+        function updateTracker() {
             const now = new Date();
-            const term = getAcademicTerm(now);
+            const term = getAcademicTerm();
 
-            // 1. Academic Year Progress & Term Countdown
+            // 1. Academic Year Progress Calculation (Unrounded decimal percentage)
             const totalDuration = term.end.getTime() - term.start.getTime();
             const elapsed = now.getTime() - term.start.getTime();
             let pct = (elapsed / totalDuration) * 100;
@@ -251,9 +269,9 @@
 
             document.getElementById('days-passed').textContent = daysPassed;
             document.getElementById('days-remaining').textContent = daysRemaining;
-            document.getElementById('days-left-badge').textContent = daysRemaining + 'd left in term';
+            document.getElementById('days-left-badge').textContent = daysRemaining + ' days left';
 
-            // Term Countdown to June 20, 2027
+            // Embedded Countdown to June 20, 2027
             if (diffToEnd > 0) {
                 const tDays = Math.floor(diffToEnd / (1000 * 60 * 60 * 24));
                 const tHours = Math.floor((diffToEnd % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -271,16 +289,14 @@
                 document.getElementById('term-secs').textContent = '00';
             }
 
-            // 2. Next Upcoming Holiday Logic
+            // 2. Dynamic Next Holiday Countdown (Auto-cycling through holidays chronologically)
             let nextHoliday = null;
-
             for (let h of holidays) {
-                if (now < h.start) {
+                if (now < h.end) {
                     nextHoliday = h;
                     break;
                 }
             }
-
             if (!nextHoliday) {
                 nextHoliday = holidays[holidays.length - 1];
             }
@@ -289,35 +305,42 @@
             document.getElementById('holiday-dates-badge').textContent = nextHoliday.display;
 
             const holidayDurationDays = Math.round((nextHoliday.end.getTime() - nextHoliday.start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
-            document.getElementById('holiday-status-msg').textContent = `Duration: ~${holidayDurationDays} day${holidayDurationDays > 1 ? 's' : ''}`;
 
-            const holidayDiff = nextHoliday.start.getTime() - now.getTime();
-
-            if (holidayDiff > 0) {
-                const hDays = Math.floor(holidayDiff / (1000 * 60 * 60 * 24));
-                const hHours = Math.floor((holidayDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const hMins = Math.floor((holidayDiff % (1000 * 60 * 60)) / (1000 * 60));
-                const hSecs = Math.floor((holidayDiff % (1000 * 60)) / 1000);
-
-                document.getElementById('h-days').textContent = String(hDays).padStart(2, '0');
-                document.getElementById('h-hours').textContent = String(hHours).padStart(2, '0');
-                document.getElementById('h-mins').textContent = String(hMins).padStart(2, '0');
-                document.getElementById('h-secs').textContent = String(hSecs).padStart(2, '0');
-            } else {
+            if (now >= nextHoliday.start && now <= nextHoliday.end) {
                 document.getElementById('h-days').textContent = '00';
                 document.getElementById('h-hours').textContent = '00';
                 document.getElementById('h-mins').textContent = '00';
                 document.getElementById('h-secs').textContent = '00';
+                document.getElementById('holiday-status-msg').textContent = 'Status: Holiday in progress';
+            } else {
+                const holidayDiff = nextHoliday.start.getTime() - now.getTime();
+                if (holidayDiff > 0) {
+                    const hDays = Math.floor(holidayDiff / (1000 * 60 * 60 * 24));
+                    const hHours = Math.floor((holidayDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const hMins = Math.floor((holidayDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    const hSecs = Math.floor((holidayDiff % (1000 * 60)) / 1000);
+
+                    document.getElementById('h-days').textContent = String(hDays).padStart(2, '0');
+                    document.getElementById('h-hours').textContent = String(hHours).padStart(2, '0');
+                    document.getElementById('h-mins').textContent = String(hMins).padStart(2, '0');
+                    document.getElementById('h-secs').textContent = String(hSecs).padStart(2, '0');
+                    document.getElementById('holiday-status-msg').textContent = `Duration: ${holidayDurationDays} day${holidayDurationDays > 1 ? 's' : ''}`;
+                } else {
+                    document.getElementById('h-days').textContent = '00';
+                    document.getElementById('h-hours').textContent = '00';
+                    document.getElementById('h-mins').textContent = '00';
+                    document.getElementById('h-secs').textContent = '00';
+                }
             }
         }
 
-        function runLoop() {
-            updateAllTrackers();
-            requestAnimationFrame(runLoop);
+        function loop() {
+            updateTracker();
+            requestAnimationFrame(loop);
         }
 
         window.onload = function() {
-            requestAnimationFrame(runLoop);
+            requestAnimationFrame(loop);
         };
     </script>
 </body>
